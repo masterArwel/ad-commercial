@@ -2,4 +2,3 @@
 export { AdvertisersPage } from './advertisers';
 export { PlanPage } from './plan';
 export { CampaignPage } from './campaign';
-export { AdvertisingPage } from './overview';

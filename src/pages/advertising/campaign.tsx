@@ -118,19 +118,19 @@ export function CampaignPage() {
       width: 200,
       render: (_: any, record: CampaignItem) => (
         <Space size="small">
-          <Button size="small" icon={<EyeOutlined />}>
+          <Button size="small" type="link">
             查看
           </Button>
           {record.status === 'running' ? (
-            <Button size="small" icon={<PauseCircleOutlined />}>
+            <Button size="small" type="link">
               暂停
             </Button>
           ) : (
-            <Button size="small" icon={<PlayCircleOutlined />}>
+            <Button size="small" type="link">
               启动
             </Button>
           )}
-          <Button size="small" icon={<EditOutlined />}>
+          <Button size="small" type="link">
             编辑
           </Button>
         </Space>

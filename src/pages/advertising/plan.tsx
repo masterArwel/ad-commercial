@@ -106,18 +106,18 @@ export function PlanPage() {
       render: (_: any, record: PlanItem) => (
         <Space size="small">
           {record.status === 'running' ? (
-            <Button size="small" icon={<PauseCircleOutlined />}>
+            <Button size="small" type="link">
               暂停
             </Button>
           ) : (
-            <Button size="small" icon={<PlayCircleOutlined />}>
+            <Button size="small" type="link">
               启动
             </Button>
           )}
-          <Button size="small" icon={<EditOutlined />}>
+          <Button size="small" type="link">
             编辑
           </Button>
-          <Button size="small" danger icon={<DeleteOutlined />}>
+          <Button size="small" danger type="link">
             删除
           </Button>
         </Space>

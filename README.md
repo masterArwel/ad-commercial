@@ -201,8 +201,3 @@ MIT License
 3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
 4. 推送到分支 (`git push origin feature/AmazingFeature`)
 5. 创建 Pull Request
-
----
-
-**项目维护者**: [您的名字]  
-**最后更新**: 2024年12月
