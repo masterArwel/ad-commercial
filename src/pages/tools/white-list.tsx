@@ -86,7 +86,7 @@ export function WhiteListPage() {
       key: 'action',
       width: 120,
       render: (_: any, record: WhiteListItem) => (
-        <Button size="small" danger icon={<DeleteOutlined />}>
+        <Button size="small" danger type="link">
           删除
         </Button>
       ),

@@ -1,8 +1,9 @@
 // 广告活动页面组件
 import { Card, Table, Button, Space, Tag } from 'antd';
-import { PlusOutlined, EditOutlined, PlayCircleOutlined, PauseCircleOutlined, EyeOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons';
 import type { ColumnProps } from 'antd/es/table';
 import PageTemplate from '@/components/PageTemplate';
+import { useNavigate } from '@tanstack/react-router';
 
 interface CampaignItem {
   id: string;
@@ -21,6 +22,7 @@ interface CampaignItem {
  * 广告活动页面
  */
 export function CampaignPage() {
+  const navigate = useNavigate();
   // 模拟数据
   const dataSource: CampaignItem[] = [
     {
@@ -121,6 +123,7 @@ export function CampaignPage() {
           <Button size="small" type="link">
             查看
           </Button>
+          <Button size="small" type="link" onClick={handleCreatePlan}>创建广告计划</Button>
           {record.status === 'running' ? (
             <Button size="small" type="link">
               暂停
@@ -140,6 +143,11 @@ export function CampaignPage() {
 
   const handleCreate = () => {
     console.log('创建广告活动');
+  };
+
+  const handleCreatePlan = () => {
+    console.log('创建广告计划');
+    navigate({ to: '/advertising/plan' });
   };
 
   return (

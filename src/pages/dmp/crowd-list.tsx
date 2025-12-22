@@ -119,13 +119,13 @@ export function CrowdListPage() {
       width: 200,
       render: (_: any, record: CrowdItem) => (
         <Space size="small">
-          <Button size="small" icon={<EyeOutlined />}>
+          <Button size="small" type="link">
             查看
           </Button>
-          <Button size="small" icon={<EditOutlined />}>
+          <Button size="small" type="link">
             编辑
           </Button>
-          <Button size="small" danger icon={<DeleteOutlined />}>
+          <Button size="small" danger type="link">
             删除
           </Button>
         </Space>

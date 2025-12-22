@@ -1,9 +1,7 @@
-import { Card, Table, Button, Space, Typography, Tag } from 'antd';
-import { PlusOutlined, } from '@ant-design/icons';
+import { Card, Table, Button, Space, Tag, Form, Input, Select } from 'antd';
+import { PlusOutlined, SearchOutlined, ReloadOutlined, } from '@ant-design/icons';
 import type { ColumnProps } from 'antd/es/table';
 import { useNavigate } from '@tanstack/react-router';
-
-const { Title } = Typography;
 
 interface AdvertiserItem {
   id: string;
@@ -19,6 +17,7 @@ interface AdvertiserItem {
  */
 export function AdvertisersPage() {
   const navigate = useNavigate();
+  const [searchForm] = Form.useForm();
   // 模拟数据
   const dataSource: AdvertiserItem[] = [
     {
@@ -100,6 +99,14 @@ export function AdvertisersPage() {
     console.log('创建广告主');
   };
 
+  const handleSearch = () => {
+    console.log('搜索');
+  };
+
+  const handleReset = () => {
+    console.log('重置');
+  };
+
   const handleCreateActivity = () => {
     console.log('创建广告活动');
     navigate({ to: '/advertising/campaign' });
@@ -107,12 +114,24 @@ export function AdvertisersPage() {
 
   return (
     <div>
-      <div style={{ marginBottom: 24 }}>
-        <Title level={2}>广告主管理</Title>
-      </div>
-
+      <Card>
+        <Form form={searchForm} layout="inline">
+          <Form.Item name="name">
+            <Input placeholder="请输入广告主名称" />
+          </Form.Item>
+          <Form.Item name="status">
+            <Select placeholder="请选择状态">
+              <Select.Option value="active">启用</Select.Option>
+              <Select.Option value="inactive">禁用</Select.Option>
+            </Select>
+          </Form.Item>
+          <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>搜索</Button>
+          <Button icon={<ReloadOutlined />} onClick={handleReset}>重置</Button>
+        </Form>
+      </Card>
+    
       <Card
-        title="广告主列表"
+        title=" "
         extra={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             新建广告主
