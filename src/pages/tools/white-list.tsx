@@ -25,7 +25,7 @@ export function WhiteListPage() {
       id: '1',
       domain: 'hellobike.com',
       type: 'domain',
-      description: '哈啰出行官方域名',
+      description: '官方域名，用于广告投放',
       createTime: '2024-01-15',
       creator: '管理员',
     },

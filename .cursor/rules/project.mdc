@@ -6,216 +6,147 @@ alwaysApply: true
 **强制承诺**：在编码实施前，我会认真阅读下面的工程规范，掌握项目的层次架构、编写规范及各个模块的逻辑组织，以确保代码编写符合项目规范。
 
 ## 1. 项目介绍
-- 这是一个基于 React.js 18.x 构建的广告投放管理 Web 前端项目，名为 AppCommercialAdvWeb(哈啰广告投放平台)
-- 项目提供广告投放、归因分析、人群管理、程序化广告、资源管理、DMP数据管理、运营配置、数据分析等广告投放和账户运营功能
-- 技术栈：React 18 + Arco Design + TypeScript + Axios + Vite + Zustand + React Router + Day.js + Tailwind CSS
-- 主要依赖：Arco Design（UI组件库）、React Router（路由管理）、Zustand（状态管理）、Tailwind CSS（样式框架）
+- 这是一个基于 React.js 18.x 构建的广告投放管理 Web 前端项目，名为 Ad Commercial Platform(广告投放管理平台)
+- 项目提供广告投放、人群管理、DMP数据管理、数据分析、系统工具等广告投放和账户运营功能
+- 技术栈：React 18 + Ant Design + TypeScript + TanStack Router + Vite + Zustand(预留) + Less
+- 主要依赖：Ant Design（UI组件库）、TanStack Router（路由管理）、Zustand（状态管理，预留）、Less（样式预处理器）
 
 ## 2. 项目结构
 ```
-AppCommercialAdvWeb/               # 项目根目录
-├── src/                           # 业务源码目录
-│   ├── assets/                    # 静态资源
-│   ├── components/                # 业务公共组件
-│   │   ├── Footer/                # 页脚组件
-│   │   ├── NavBar/                # 导航栏组件
-│   │   ├── PermissionWrapper/     # 权限包装组件
-│   │   ├── ProTable/              # 高级表格组件
-│   │   ├── Upload/                # 上传组件
-│   │   ├── DynamicFormDialog/     # 动态表单弹窗
-│   │   ├── FormDialog/            # 表单弹窗
-│   │   ├── LabelFormDialog/       # 标签表单弹窗
-│   │   ├── Loading/               # 加载组件
-│   │   ├── Lottie/                # Lottie动画组件
-│   │   ├── ImageCropper/          # 图片裁剪组件
-│   │   ├── MultiDateSelect/       # 多日期选择组件
-│   │   ├── SearchSelect/          # 搜索选择组件
-│   │   ├── CityTreeSelect/        # 城市树选择组件
-│   │   ├── CopyText/              # 复制文本组件
-│   │   ├── Echarts/               # 图表组件
-│   │   └── XlsxUploader/          # Excel上传组件
-│   ├── pages/                     # 页面视图层
-│   │   ├── advertising/           # 广告投放模块
-│   │   │   ├── advertisers/       # 广告主管理
-│   │   │   ├── advertising-plan/  # 广告计划
-│   │   │   ├── campaign/         # 广告活动
-│   │   │   ├── agent-channel/    # 代理商渠道
-│   │   │   ├── data-report/       # 数据报表
-│   │   │   └── components/        # 广告相关组件
-│   │   ├── attribution/          # 归因分析模块
-│   │   │   └── advertising-event/ # 广告事件
-│   │   ├── crowd/                # 人群管理模块
-│   │   │   └── crowd-manage/      # 人群管理
-│   │   ├── programmatic/          # 程序化广告模块
-│   │   │   ├── porgram-list/      # 程序列表
-│   │   │   ├── porgram-detail/   # 程序详情
-│   │   │   ├── code-list/        # 代码列表
-│   │   │   └── code-manage/      # 代码管理
-│   │   ├── resource/             # 资源管理模块
-│   │   │   ├── resource-place/   # 资源位管理
-│   │   │   ├── positions/        # 位置管理
-│   │   │   └── template-ins/     # 模板实例
-│   │   ├── dmp/                   # DMP数据管理模块
-│   │   │   ├── crowd-list/       # 人群列表
-│   │   │   ├── tag-plaza/        # 标签广场
-│   │   │   └── crowd-insights/   # 人群洞察
-│   │   ├── operation/             # 运营配置模块
-│   │   │   └── pdb-priority/      # PDB优先级
-│   │   ├── analytics/             # 数据分析模块
-│   │   │   └── flow-analysis/    # 流量分析
-│   │   ├── tools/                 # 工具模块
-│   │   │   └── white-list/       # 白名单管理
-│   │   ├── dashboard/             # 仪表盘
-│   │   └── exception/             # 异常页面
-│   │       └── 403/               # 403无权限页面
-│   ├── apis/                      # 业务API接口
-│   │   ├── advertising/           # 广告相关接口
-│   │   ├── attribution/          # 归因相关接口
-│   │   ├── crowd/                 # 人群相关接口
-│   │   ├── programmatic/          # 程序化广告接口
-│   │   ├── resource/              # 资源相关接口
-│   │   ├── dmp/                   # DMP相关接口
-│   │   ├── operation/             # 运营相关接口
-│   │   ├── analytics/             # 分析相关接口
-│   │   ├── tools/                 # 工具相关接口
-│   │   ├── user.ts                # 用户接口
-│   │   ├── userAnalysis.ts        # 用户分析接口
-│   │   ├── city.ts                # 城市接口
-│   │   ├── scene.ts               # 场景接口
-│   │   └── common.ts              # 通用接口
-│   ├── stores/                    # Zustand 状态管理
-│   │   ├── globalStore.ts         # 全局状态
-│   │   └── advertising/           # 广告模块状态
-│   │       └── planFormStore.ts   # 计划表单状态
-│   ├── hooks/                     # React Hooks
-│   │   ├── useClipboard.ts        # 剪贴板Hook
-│   │   ├── useHtml2Canvas.ts      # HTML转Canvas Hook
-│   │   ├── useModal.tsx           # 弹窗Hook
-│   │   ├── useModel.ts            # 模型Hook
-│   │   └── usePagination.ts       # 分页Hook
-│   ├── utils/                     # 工具函数
-│   │   ├── authentication.ts     # 认证工具
-│   │   ├── changeTheme.ts         # 主题切换工具
-│   │   ├── China.ts               # 中国地区数据
-│   │   ├── format.ts              # 格式化工具
-│   │   ├── getPageInfo.ts         # 页面信息工具
-│   │   ├── getUrlParams.ts        # URL参数工具
-│   │   ├── is.ts                  # 类型判断工具
-│   │   ├── request.ts             # 请求工具
-│   │   ├── requestErrCatch.ts     # 请求错误捕获
-│   │   ├── useChartTheme.ts       # 图表主题工具
-│   │   ├── useLocale.ts           # 国际化工具
-│   │   ├── useStorage.ts          # 存储工具
-│   │   ├── xlsx.ts                # Excel工具
-│   │   └── worker/                # Web Worker
-│   │       ├── md5.worker.ts      # MD5计算Worker
-│   │       └── workerWrapper.ts   # Worker包装器
-│   ├── constants/                 # 常量定义
-│   │   ├── index.ts               # 通用常量
-│   │   ├── adv.ts                 # 广告常量
-│   │   └── resource.ts            # 资源常量
-│   ├── types/                     # TypeScript类型定义
-│   │   ├── index.ts               # 通用类型
-│   │   ├── crowd.ts               # 人群类型
-│   │   ├── people.ts              # 人员类型
-│   │   ├── tag.ts                 # 标签类型
-│   │   ├── dynamicFormTypes.ts    # 动态表单类型
-│   │   └── formOptions.ts         # 表单选项类型
-│   ├── style/                     # 样式文件
-│   │   ├── global.less            # 全局样式
-│   │   └── layout.module.less     # 布局样式
-│   ├── locale/                    # 国际化
-│   │   └── index.ts               # 国际化配置
-│   ├── mocks/                     # Mock数据
-│   │   └── handlers/              # Mock处理器
-│   ├── models/                    # 数据模型
-│   │   └── advertising/           # 广告数据模型
-│   ├── config/                    # 配置文件
-│   │   └── env.ts                 # 环境配置
-│   ├── routes.ts                  # 路由配置
-│   ├── layout.tsx                 # 布局组件
-│   ├── index.tsx                  # 应用入口
-│   ├── context.tsx                # React上下文
-│   ├── settings.json              # 应用设置
-│   └── declaration.d.ts           # 类型声明
-├── public/                        # 静态资源目录
-│   └── index.html                 # HTML模板
-├── dist/                          # 构建输出目录
-├── docs/                          # 文档目录
-├── vite.config.ts                 # Vite构建配置
-├── tsconfig.json                  # TypeScript配置
-├── tailwind.config.js             # Tailwind CSS配置
-├── postcss.config.js              # PostCSS配置
-├── package.json                   # 项目依赖配置
-└── README.md                      # 项目说明文档
+adcommercial/                         # 项目根目录
+├── src/                              # 业务源码目录
+│   ├── components/                   # 业务公共组件
+│   │   ├── AntdDemo.tsx             # Ant Design 演示组件
+│   │   ├── AntdProvider.tsx         # Ant Design 配置提供者
+│   │   ├── ApiExample.tsx           # API 调用示例组件
+│   │   ├── BreadcrumbNav.tsx        # 面包屑导航组件
+│   │   ├── Loading.tsx              # 加载组件
+│   │   └── PageTemplate.tsx         # 页面模板组件
+│   ├── pages/                       # 页面视图层
+│   │   ├── dashboard/               # 仪表盘模块
+│   │   │   ├── dashboard.tsx        # 仪表盘主页面
+│   │   │   ├── index.tsx            # 仪表盘概览页面
+│   │   │   └── index.ts             # 导出文件
+│   │   ├── advertising/             # 广告投放模块
+│   │   │   ├── advertisers.tsx      # 广告主管理
+│   │   │   ├── plan.tsx             # 广告计划
+│   │   │   ├── campaign.tsx         # 广告活动
+│   │   │   └── index.ts             # 导出文件
+│   │   ├── crowd/                   # 人群管理模块
+│   │   │   └── manage.tsx           # 人群管理
+│   │   ├── dmp/                     # DMP数据管理模块
+│   │   │   └── crowd-list.tsx       # 人群列表
+│   │   ├── analytics/               # 数据分析模块
+│   │   │   └── flow-analysis.tsx    # 流量分析
+│   │   └── tools/                   # 工具模块
+│   │       └── white-list.tsx       # 白名单管理
+│   ├── routes/                      # 路由配置
+│   │   ├── __root.tsx               # 根路由
+│   │   ├── index.tsx                # 首页路由
+│   │   ├── advertising/             # 广告投放路由
+│   │   │   ├── index.tsx            # 广告投放概览
+│   │   │   ├── advertisers.tsx      # 广告主管理路由
+│   │   │   ├── plan.tsx             # 广告计划路由
+│   │   │   └── campaign.tsx         # 广告活动路由
+│   │   ├── crowd/                   # 人群管理路由
+│   │   │   └── manage.tsx           # 人群管理路由
+│   │   ├── dmp/                     # DMP数据管理路由
+│   │   │   └── crowd-list.tsx       # 人群列表路由
+│   │   ├── analytics/               # 数据分析路由
+│   │   │   └── flow-analysis.tsx    # 流量分析路由
+│   │   └── tools/                   # 工具路由
+│   │       └── white-list.tsx       # 白名单管理路由
+│   ├── layouts/                     # 布局组件
+│   │   └── AppLayout.tsx            # 主应用布局
+│   ├── config/                      # 配置文件
+│   │   └── menuConfig.ts            # 菜单配置
+│   ├── hooks/                       # React Hooks
+│   │   └── usePermissions.ts        # 权限管理Hook
+│   ├── utils/                       # 工具函数
+│   │   ├── iconMap.tsx              # 图标映射工具
+│   │   └── request.ts               # 请求工具
+│   ├── services/                    # API 服务
+│   │   ├── base.ts                  # 基础服务
+│   │   └── user.ts                  # 用户服务
+│   ├── stores/                      # Zustand 状态管理
+│   │   └── index.ts                 # 状态管理入口
+│   ├── types/                       # TypeScript类型定义
+│   │   ├── antd.d.ts                # Ant Design 类型扩展
+│   │   └── tanstack-router.d.ts     # TanStack Router 类型声明
+│   ├── routeTree.gen.ts             # TanStack Router 自动生成的路由树
+│   ├── main.tsx                     # 应用入口
+│   ├── index.css                    # 全局样式
+│   └── vite-env.d.ts                # Vite 环境类型声明
+├── public/                          # 静态资源目录
+├── dist/                            # 构建输出目录
+├── .cursor/                         # Cursor 配置目录
+│   └── rules/                       # 代码规范配置
+├── .tanstack/                       # TanStack Router 缓存目录
+├── vite.config.ts                   # Vite构建配置
+├── tsconfig.json                    # TypeScript配置
+├── tsconfig.node.json               # Node.js TypeScript配置
+├── package.json                     # 项目依赖配置
+├── package-lock.json                # 依赖锁定文件
+├── .gitignore                       # Git忽略文件
+├── index.html                       # HTML模板
+└── README.md                        # 项目说明文档
 ```
 
 ## 3. 文件命名规范
-- **页面文件**：使用 PascalCase（如：`dashboard.tsx`、`login.tsx`、`accountInfo/index.tsx`）
-- **组件文件**：使用 PascalCase（如：`Header.tsx`、`Footer.tsx`、`Modal.tsx`）
-- **组件目录**：使用 PascalCase（如：`Form/`、`PersonalCenter/`、`AccountInfo/`）
-- **路由文件**：使用 kebab-case（如：`account-main.tsx`、`create-account.tsx`、`personal-center.profile.tsx`）
-- **服务文件**：使用 camelCase（如：`auth.ts`、`user.ts`、`accounts.ts`）
-- **工具函数文件**：使用 camelCase（如：`index.ts`、`request.ts`）
-- **样式文件**：使用 `.css` 后缀，与组件文件同名（如：`Footer.css`、`common.css`）
-- **配置文件**：使用 kebab-case（如：`vite.config.ts`、`eslint.config.js`）
-- **TypeScript文件**：使用 `.ts` 或 `.tsx` 后缀（如：`index.ts`、`Component.tsx`）
+- **页面文件**：使用 camelCase（如：`dashboard.tsx`、`advertisers.tsx`、`manage.tsx`）
+- **组件文件**：使用 PascalCase（如：`AppLayout.tsx`、`BreadcrumbNav.tsx`、`Loading.tsx`）
+- **路由文件**：使用 kebab-case 或 camelCase（如：`index.tsx`、`advertisers.tsx`、`flow-analysis.tsx`）
+- **服务文件**：使用 camelCase（如：`base.ts`、`user.ts`）
+- **工具函数文件**：使用 camelCase（如：`request.ts`、`iconMap.tsx`）
+- **配置文件**：使用 camelCase（如：`menuConfig.ts`、`vite.config.ts`）
+- **TypeScript文件**：使用 `.ts` 或 `.tsx` 后缀
 
 ## 4. 样式开发规范
-- 本项目使用 **Less**、**Tailwind CSS** 和 **Arco Design** 样式系统
+- 本项目使用 **CSS**、**Less** 和 **Ant Design** 样式系统
 - **强制**：统一使用 px 作为像素单位，基于桌面端 Web 应用开发
 - **强制**：避免全局样式污染，使用局部作用域的样式类名或 CSS Modules
-- **推荐**：使用 Arco Design 组件库的主题定制和样式覆盖机制
+- **推荐**：使用 Ant Design 组件库的主题定制和样式覆盖机制
 - **强制**：当盒子设置了padding后，建议设置 `box-sizing: border-box;` 来防止盒子宽度溢出问题
-- **推荐**：优先使用 Tailwind CSS 工具类，复杂样式使用 Less 文件
-- **推荐**：使用 CSS Modules 来组织组件样式，避免样式冲突
+- **推荐**：复杂样式使用 Less 文件，简单样式可以使用内联样式
 
 ## 5. 页面开发规范
 
-### 5.1 路由配置（React Router）
+### 5.1 路由配置（TanStack Router）
 #### 5.1.1 路由定义位置：
-- 路由配置：`src/routes.ts`
-- 布局组件：`src/layout.tsx`
-- 应用入口：`src/index.tsx`
+- 路由配置：`src/routes/` 目录下的各个 `.tsx` 文件
+- 布局组件：`src/layouts/AppLayout.tsx`
+- 应用入口：`src/main.tsx`
+- 根路由：`src/routes/__root.tsx`
 
 #### 5.1.2 新增页面路由步骤：
 ```typescript
-// 1. 在 src/routes.ts 中添加路由配置
-export const routes: IRoute[] = [
-  {
-    name: 'menu.yourModule',
-    key: 'your-module',
-    children: [
-      {
-        name: 'menu.yourModule.list',
-        key: 'your-module/list',
-        componentPath: 'your-module/list',
-        element: () => import('@/pages/your-module/list'),
-        children: [
-          {
-            name: 'menu.yourModule.form',
-            key: 'your-module/form/:id?',
-            ignore: true,
-            componentPath: 'your-module/form',
-            element: () => import('@/pages/your-module/form'),
-          },
-        ],
-      },
-    ],
-  },
-];
+// 1. 在 src/routes/ 目录下创建对应的路由文件
+// 例如：src/routes/advertising/advertisers.tsx
+import { createFileRoute } from '@tanstack/react-router';
+import { AdvertisersPage } from '@/pages/advertising';
+
+export const Route = createFileRoute('/advertising/advertisers')({
+  component: AdvertisersPage,
+});
 
 // 2. 在 src/pages/ 目录下创建对应的页面组件
-// 3. 路由会自动注册到布局组件中
+// 例如：src/pages/advertising/advertisers.tsx
+export function AdvertisersPage() {
+  return <div>广告主管理页面</div>;
+}
+
+// 3. 路由会自动注册到 TanStack Router 系统中
 ```
 
 ### 5.2 页面主文件开发规范
 - **页面组件模板**：React 页面组件请遵循如下规范：
 ```typescript
 import React, { useState, useEffect } from 'react';
-import { Card, Table, Button, Message } from '@arco-design/web-react';
-import type { TableColumnProps } from '@arco-design/web-react/es/Table';
-import { yourPageApi } from '@/apis/yourPage';
+import { Card, Table, Button, Space, Typography } from 'antd';
+import type { ColumnsType } from 'antd/es/table';
+import { useNavigate } from '@tanstack/react-router';
+
+const { Title } = Typography;
 
 interface DataItem {
   id: string /** 数据ID */;
@@ -223,7 +154,8 @@ interface DataItem {
   status: number /** 状态 */;
 }
 
-const YourPage: React.FC = () => {
+export function YourPage() {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [tableData, setTableData] = useState<DataItem[]>([]);
 
@@ -236,11 +168,10 @@ const YourPage: React.FC = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await yourPageApi.getData();
-      setTableData(response.data || []);
+      // const response = await yourPageApi.getData();
+      // setTableData(response.data || []);
     } catch (error) {
-      Message.error('获取数据失败');
-      console.error('fetchData error:', error);
+      console.error('获取数据失败:', error);
     } finally {
       setLoading(false);
     }
@@ -262,7 +193,7 @@ const YourPage: React.FC = () => {
   };
 
   // 表格列定义
-  const columns: TableColumnProps[] = [
+  const columns: ColumnsType<DataItem> = [
     {
       title: '名称',
       dataIndex: 'name',
@@ -278,22 +209,22 @@ const YourPage: React.FC = () => {
       key: 'action',
       width: 180,
       render: (_, record) => (
-        <>
-          <Button size="small" onClick={() => handleEdit(record)}>
+        <Space size="small">
+          <Button size="small" type="link" onClick={() => handleEdit(record)}>
             编辑
           </Button>
-          <Button size="small" danger onClick={() => handleDelete(record)}>
+          <Button size="small" danger type="link" onClick={() => handleDelete(record)}>
             删除
           </Button>
-        </>
+        </Space>
       ),
     },
   ];
 
   return (
-    <div style={{ padding: '24px' }}>
+    <div>
       <Card
-        title="页面标题"
+        title={<Title level={4}>页面标题</Title>}
         extra={
           <Button type="primary" onClick={handleCreate}>
             新建
@@ -305,58 +236,45 @@ const YourPage: React.FC = () => {
           dataSource={tableData}
           loading={loading}
           rowKey="id"
+          pagination={{
+            total: tableData.length,
+            pageSize: 10,
+            showSizeChanger: true,
+            showQuickJumper: true,
+            showTotal: (total) => `共 ${total} 条记录`,
+          }}
         />
       </Card>
     </div>
   );
-};
+}
 
 export default YourPage;
 ```
 
 #### 5.2.1 页面开发要求：
 - **React版本**：使用 React 18，支持 Hooks 和函数组件
-- **状态管理**：组件内部状态使用 useState，全局状态使用 Zustand（stores/）
-- **基础组件**：基于 Arco Design 组件库
+- **状态管理**：组件内部状态使用 useState，全局状态使用 Zustand（预留）
+- **基础组件**：基于 Ant Design 组件库
 - **网络请求**：使用封装的 request 工具（utils/request.ts），统一错误处理和响应格式
-- **路由**：基于 React Router，支持动态路由和权限控制
+- **路由**：基于 TanStack Router，支持动态路由和类型安全
 - **类型定义**：所有接口和组件必须定义 TypeScript 类型
+- **按钮样式**：操作按钮统一使用 `type="link"` 样式，避免使用图标
 
 ### 5.3 页面样式规范
-- **样式文件**：使用 `.less` 后缀，文件名通常与组件同名
+- **样式文件**：使用 `.css` 或 `.less` 后缀，文件名通常与组件同名
 - **样式类名**：建议使用页面模块名作为前缀，避免样式冲突
-- **样式组织**：使用 CSS Modules 或 Tailwind CSS 工具类
-- **样式示例**：
-```less
-/* YourPage.module.less */
-.your-page-container {
-  padding: 24px;
-  background: #fff;
-}
-
-.your-page-header {
-  margin-bottom: 16px;
-}
-
-.your-page-title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
-}
-
-.your-page-content {
-  /* 内容样式 */
-}
-```
+- **样式组织**：使用 CSS Modules 或内联样式
+- **内联样式**：简单样式可以直接使用 style 属性
 
 ### 5.4 布局组件使用
-- **主布局**：项目使用 layout.tsx 组件，包含固定头部、侧边栏、底部
-- **页面容器**：页面内容建议使用 Arco Design 的 Card、Layout 等容器组件
-- **响应式**：基于 Arco Design 的栅格系统（Row、Col）实现响应式布局
+- **主布局**：项目使用 AppLayout.tsx 组件，包含固定头部、侧边栏
+- **页面容器**：页面内容建议使用 Ant Design 的 Card、Layout 等容器组件
+- **响应式**：基于 Ant Design 的栅格系统（Row、Col）实现响应式布局
 
 ## 6. 网络层开发规范
 
-### 6.1 接口服务定义 (src/apis/)
+### 6.1 接口服务定义 (src/services/)
 - **强制规范**：API 接口必须严格遵循如下规范：
 ```typescript
 import request from '@/utils/request';
@@ -429,12 +347,12 @@ export const yourPageApi = {
 - **强制**：API 函数必须包含清晰的 JSDoc 注释说明参数和返回值
 - **强制**：请求方法使用大写（GET/POST/PUT/DELETE）
 - **强制**：所有接口必须定义 TypeScript 类型
-- **推荐**：接口服务按业务模块分组，如 `advertising/`、`user.ts`、`common.ts`
+- **推荐**：接口服务按业务模块分组，如 `user.ts`、`base.ts`
 - **强制**：错误处理统一在 request 工具中处理，页面层面处理具体业务逻辑
 
-## 7. 状态管理规范 (Zustand)
+## 7. 状态管理规范 (Zustand - 预留)
 
-### 7.1 Store 定义
+### 7.1 Store 定义（预留）
 ```typescript
 // src/stores/globalStore.ts
 import { create } from 'zustand';
@@ -442,104 +360,73 @@ import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
 export interface UserInfo {
-  createUserGuid?: string;
-  defaultTargetUrl?: string | null;
-  email?: string; // 邮箱
-  guid?: string;
-  jobNumber?: string; // 工号
-  realName?: string; // 姓名
-  status?: number;
-  userName?: string;
-  permissions: string[]; // 权限
+  id?: string;
+  name?: string;
+  email?: string;
+  permissions: string[];
 }
 
-export type Theme = 'light' | 'dark';
-export type Locale = 'zh-CN' | 'en-US';
-
 export interface GlobalState {
-  settings?: typeof defaultSettings;
   userInfo?: UserInfo;
-  theme: Theme;
-  lang: Locale;
-  userLoading?: boolean;
-  init: () => Promise<void>;
-  updateSettings: (settings: typeof defaultSettings) => void;
-  updateUserInfo: (userInfo: any) => void;
-  setTheme: (theme: Theme) => void;
-  setLocale: (lang: Locale) => void;
+  theme: 'light' | 'dark';
+  loading: boolean;
+  setUserInfo: (userInfo: UserInfo) => void;
+  setTheme: (theme: 'light' | 'dark') => void;
+  setLoading: (loading: boolean) => void;
 }
 
 const useGlobalStore = create<GlobalState>()(
   devtools(
-    immer((set, get) => ({
-      settings: defaultSettings,
-      lang: (getDefaultStorage('lang') || 'zh-CN') as Locale,
-      theme: (getDefaultStorage('theme') || 'light') as Theme,
+    immer((set) => ({
+      theme: 'light',
+      loading: false,
       userInfo: {
         permissions: [],
       },
-      userLoading: true,
 
-      setLocale: (lang) => {
+      setUserInfo: (userInfo) => {
         set((state) => {
-          state.lang = lang;
-          localStorage.setItem('lang', lang);
+          state.userInfo = userInfo;
         });
       },
+
       setTheme: (theme) => {
         set((state) => {
           state.theme = theme;
-          localStorage.setItem('theme', theme);
         });
       },
 
-      init: async () => {
-        await ssoAuth.signIn({
-          clientId: 'AppCommercialAdvWeb',
-          clientSecret: '1f7109f5d4164757909753a71fa3b601',
-        });
-        const { userActions, userInfo } = await getLoginUserInfo();
-        get().updateUserInfo({
-          ...userInfo,
-          permissions: userActions,
-        });
-      },
-
-      updateSettings: (settings) => {
+      setLoading: (loading) => {
         set((state) => {
-          state.settings = settings;
-        });
-      },
-      updateUserInfo: (userInfo) => {
-        set((state) => {
-          state.userInfo = userInfo;
-          state.userLoading = false;
+          state.loading = loading;
         });
       },
     })),
   ),
 );
+
+export default useGlobalStore;
 ```
 
-### 7.2 组件中使用 Zustand
+### 7.2 组件中使用 Zustand（预留）
 ```typescript
 import useGlobalStore from '@/stores/globalStore';
 
 const YourComponent: React.FC = () => {
   // 获取状态和方法
-  const { userInfo, theme, setTheme, updateUserInfo } = useGlobalStore();
+  const { userInfo, theme, setTheme, setUserInfo } = useGlobalStore();
 
   // 选择性订阅（性能优化）
   const userInfo = useGlobalStore((state) => state.userInfo);
-  const setUserInfo = useGlobalStore((state) => state.updateUserInfo);
+  const setUserInfo = useGlobalStore((state) => state.setUserInfo);
 
   const handleLogout = () => {
-    updateUserInfo({ permissions: [] });
+    setUserInfo({ permissions: [] });
   };
 
   return (
     <div>
-      <p>用户：{userInfo?.realName}</p>
+      <p>用户：{userInfo?.name}</p>
       <Button onClick={handleLogout}>退出登录</Button>
     </div>
   );
@@ -552,92 +439,35 @@ const YourComponent: React.FC = () => {
 - **推荐**：使用 devtools 和 immer 中间件进行状态管理和调试
 - **推荐**：使用选择性订阅优化性能，避免不必要的重新渲染
 
-## 8. 数据埋点规范
+## 8. 工程化操作
 
-### 8.1 埋点库使用
-- 项目使用 `window.TianQi.UBT` 作为埋点SDK
-- 埋点配置定义在 `src/constants/index.ts` 中
-
-### 8.2 埋点实现示例
-```typescript
-// src/constants/index.ts 埋点配置
-export const SYSTEM_CODE = 'AppCommercialAdvWeb';
-export const ENV = import.meta.env.REACT_APP_ENV || 'dev';
-export const categoryId = 'dataplatform';
-
-// 在React组件中使用示例
-import { useEffect } from 'react';
-
-const YourPage: React.FC = () => {
-  useEffect(() => {
-    // 页面访问埋点
-    const { UBT } = window.TianQi;
-    UBT?.pageView({
-      pageId: 'your_page_id',
-      categoryId: 'dataplatform',
-    });
-
-    // 页面离开埋点
-    return () => {
-      UBT?.pageViewOut({
-        pageId: 'your_page_id',
-        categoryId: 'dataplatform',
-      });
-    };
-  }, []);
-
-  const handleClick = () => {
-    // 点击埋点
-    const { UBT } = window.TianQi;
-    UBT?.clickButton({
-      pageId: 'your_page_id',
-      buttonName: 'button_name',
-      categoryId: 'dataplatform',
-    });
-  };
-
-  return <Button onClick={handleClick}>点击按钮</Button>;
-};
-```
-
-### 8.3 埋点规范要求
-- **推荐**：当有埋点需求文档时，按照文档要求实现具体的埋点事件
-- **强制**：所有埋点必须包含 `pageId` 和 `categoryId`
-- **强制**：页面访问埋点使用 `UBT.pageView()`，页面离开使用 `UBT.pageViewOut()`
-- **强制**：点击埋点使用 `UBT.clickButton()`，必须额外包含 `buttonName` 字段
-- **强制**：曝光埋点使用 `UBT.moduleExpose()`，必须额外包含 `moduleId`、`contentId` 和 `exposureTimes` 字段
-- **强制**：埋点不应影响正常业务逻辑，异常要做好容错处理（使用可选链 `?.`）
-
-## 9. 工程化操作
-
-### 9.1 项目开发
-#### 9.1.1 安装依赖
+### 8.1 项目开发
+#### 8.1.1 安装依赖
 ```bash
 npm install
 ```
 
-#### 9.1.2 项目启动
+#### 8.1.2 项目启动
 本地开发命令：
 ```bash
-# 开发环境（默认开发环境）
+# 开发环境
 npm run dev
 ```
 
-#### 9.1.3 项目构建
+#### 8.1.3 项目构建
 ```bash
 # 构建生产版本（使用Vite）
 npm run build
 ```
 
-### 9.2 开发工具配置
+### 8.2 开发工具配置
 - **路径别名**：项目已配置路径映射，可以使用 `@/` 指向 `src/` 目录
 - **热重载**：开发环境支持 Vite HMR，代码修改后自动刷新
 - **构建优化**：使用 Vite 构建工具，支持按需加载、代码分割、压缩等优化策略
-- **多环境配置**：支持 dev、fat、uat、pre、pro 多环境配置
 - **TypeScript**：严格模式，确保类型安全
 - **ESLint & Prettier**：代码质量检查和格式化
 
-### 9.3 代码提交规范
+### 8.3 代码提交规范
 ```bash
 # 提交前会自动运行 lint-staged 检查
 git add .
@@ -645,7 +475,7 @@ git commit -m "feat: 新增功能描述"
 
 # 提交信息格式建议遵循 conventional commits 规范
 # feat: 新功能
-# fix: 问题修复  
+# fix: 问题修复 
 # docs: 文档更新
 # style: 代码格式调整
 # refactor: 代码重构
@@ -653,7 +483,7 @@ git commit -m "feat: 新增功能描述"
 # chore: 构建工具或辅助工具的变动
 ```
 
-### 9.4 分支管理
+### 8.4 分支管理
 ```bash
 # 从主分支创建功能分支
 git checkout -b feature/your-feature-name
@@ -663,45 +493,43 @@ git checkout develop
 git pull origin develop
 git merge feature/your-feature-name
 
-# 测试通过后合并到主分支  
+# 测试通过后合并到主分支 
 git checkout main
 git pull origin main
 git merge develop
 ```
 > **注意**：当遇到代码合并冲突时，请与团队确认合并策略，切勿强制覆盖！
 
-## 10. 重要技术要点
+## 9. 重要技术要点
 
-### 10.1 国际化配置
+### 9.1 TanStack Router 配置
 ```typescript
-// src/locale/index.ts
-import zh_CN from '@arco-design/web-react/es/locale/zh-CN';
-import dayjs from 'dayjs';
-import 'dayjs/locale/zh-cn';
+// src/main.tsx
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
 
-dayjs.locale('zh-cn');
+const router = createRouter({ routeTree });
 
-// 在 ConfigProvider 中配置
-<ConfigProvider locale={zh_CN}>
-  <App>
-    <RouterProvider router={router} />
-  </App>
-</ConfigProvider>
+// 在 React 应用中使用
+<RouterProvider router={router} />
 ```
 
-### 10.2 SSO认证配置
+### 9.2 Ant Design 配置
 ```typescript
-// src/stores/globalStore.ts
-import ssoAuth from '@hb/sso-auth2';
+// src/components/AntdProvider.tsx
+import { ConfigProvider } from 'antd';
+import zhCN from 'antd/locale/zh_CN';
 
-// SSO认证初始化
-await ssoAuth.signIn({
-  clientId: 'AppCommercialAdvWeb',
-  clientSecret: '1f7109f5d4164757909753a71fa3b601',
-});
+export function AntdProvider({ children }: { children: React.ReactNode }) {
+  return (
+    <ConfigProvider locale={zhCN}>
+      {children}
+    </ConfigProvider>
+  );
+}
 ```
 
-### 10.3 路径别名配置
+### 9.3 路径别名配置
 ```typescript
 // vite.config.ts
 resolve: {
@@ -710,7 +538,7 @@ resolve: {
   },
 }
 
-// tsconfig.app.json
+// tsconfig.json
 {
   "compilerOptions": {
     "baseUrl": ".",
@@ -721,19 +549,51 @@ resolve: {
 }
 ```
 
-### 10.4 应用初始化
+### 9.4 图标映射系统
 ```typescript
-// src/index.tsx
-const initApp = async () => {
-  const { init } = useGlobalStore.getState();
-  try {
-    await init();
-  } catch (error) {
-    console.error('Failed to initialize app store:', error);
-  }
+// src/utils/iconMap.tsx
+import React from 'react';
+import {
+  DashboardOutlined,
+  BulbOutlined,
+  TeamOutlined,
+  DatabaseOutlined,
+  BarChartOutlined,
+  ToolOutlined,
+} from '@ant-design/icons';
+
+export const iconMap: Record<string, React.ReactNode> = {
+  DashboardOutlined: <DashboardOutlined />,
+  BulbOutlined: <BulbOutlined />,
+  TeamOutlined: <TeamOutlined />,
+  DatabaseOutlined: <DatabaseOutlined />,
+  BarChartOutlined: <BarChartOutlined />,
+  ToolOutlined: <ToolOutlined />,
 };
 
-initApp().then(() => {
-  root.render(/* ... */);
-});
+export const getIcon = (iconName?: string): React.ReactNode => {
+  if (!iconName) return null;
+  return iconMap[iconName] || null;
+};
+```
+
+### 9.5 应用初始化
+```typescript
+// src/main.tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
+import { AntdProvider } from './components/AntdProvider';
+import './index.css';
+
+const router = createRouter({ routeTree });
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <AntdProvider>
+      <RouterProvider router={router} />
+    </AntdProvider>
+  </React.StrictMode>,
+);
 ```
