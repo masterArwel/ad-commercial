@@ -1,0 +1,89 @@
+.search-form-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.search-form-wrapper .search-form-items {
+  margin: 0;
+  flex: 1;
+  width: 100%;
+}
+
+.search-form-wrapper .right-button {
+  border-left: 1px solid var(--color-border-2);
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+
+.search-form-wrapper .arco-form-label-item-left > label {
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+/* Allow Ant Design form labels to wrap within the search form */
+.search-form-wrapper .ant-form-item-label > label {
+  white-space: normal !important;
+  word-break: break-word;
+}
+
+.mt-4 {
+  margin-top: 20px;
+}
+
+.rounded {
+  border-radius: 2.5px;
+  min-height: 500px;
+}
+
+.operation-content {
+  margin-bottom: 10px;
+}
+
+.search-action {
+  display: flex;
+  padding-left: 12.5px;
+  margin-bottom: 12.5px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Limit DatePicker width within SearchPage only */
+.search-form-wrapper .ant-picker {
+  min-width: 240px;
+}
+
+.search-form-items .ant-select-selector {
+  background-color: rgb(247, 249, 250) !important;
+  border-color: transparent !important;
+}
+
+.search-form-items .ant-select-selector:hover {
+  border-color: rgb(0, 136, 255) !important;
+}
+
+.search-form-items .ant-select-selector:focus {
+  border-color: rgb(0, 136, 255) !important;
+}
+
+.search-form-items .ant-select-selector:active {
+  border-color: rgb(0, 136, 255) !important;
+}
+
+.search-form-items .ant-picker-outlined {
+  background-color: rgb(247, 249, 250) !important;
+  border-color: transparent !important;
+}
+
+.search-form-items .ant-picker-outlined:hover {
+  border-color: rgb(0, 136, 255) !important;
+}
+
+.search-form-items .ant-picker-outlined:focus {
+  border-color: rgb(0, 136, 255) !important;
+}
+
+.search-form-items .ant-picker-outlined:active {
+  border-color: rgb(0, 136, 255) !important;
+}

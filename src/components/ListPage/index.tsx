@@ -238,7 +238,7 @@ const ProTable = forwardRef<SearchFormRef, ProTableProps>(
         >
           {children}
           {!!operation && <div className="operation-content">{operation}</div>}
-          <div className="mt-4 rounded">
+          <div>
             <Table<Record<string, unknown>>
               rowKey={tableRowKey as string}
               loading={loading}

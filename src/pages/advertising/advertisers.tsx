@@ -1,7 +1,12 @@
-import { Card, Table, Button, Space, Tag, Form, Input, Select } from 'antd';
-import { PlusOutlined, SearchOutlined, ReloadOutlined, } from '@ant-design/icons';
-import type { ColumnProps } from 'antd/es/table';
+import { Button, Space, Tag } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+
 import { useNavigate } from '@tanstack/react-router';
+import ListPage from '@/components/ListPage';
+import type { ColumnsType } from 'antd/es/table';
+import type { FormOptions } from '@/components/ListPage/interface';
+
+import { advertisersData } from '@/bffData/advertising';
 
 interface AdvertiserItem {
   id: string;
@@ -17,36 +22,8 @@ interface AdvertiserItem {
  */
 export function AdvertisersPage() {
   const navigate = useNavigate();
-  const [searchForm] = Form.useForm();
-  // 模拟数据
-  const dataSource: AdvertiserItem[] = [
-    {
-      id: '1',
-      name: '哈啰出行',
-      status: 'active',
-      createTime: '2024-01-15',
-      contactPerson: '张三',
-      phone: '13800138000',
-    },
-    {
-      id: '2',
-      name: '美团外卖',
-      status: 'active',
-      createTime: '2024-01-10',
-      contactPerson: '李四',
-      phone: '13800138001',
-    },
-    {
-      id: '3',
-      name: '滴滴出行',
-      status: 'inactive',
-      createTime: '2024-01-05',
-      contactPerson: '王五',
-      phone: '13800138002',
-    },
-  ];
 
-  const columns: ColumnProps<AdvertiserItem>[] = [
+  const columns = [
     {
       title: '广告主名称',
       dataIndex: 'name',
@@ -95,6 +72,30 @@ export function AdvertisersPage() {
     },
   ];
 
+  const searchFormOptions: FormOptions[] = [
+    {
+      label: '广告主名称',
+      fieldName: 'name',
+      type: 'Input',
+    },
+    {
+      label: '状态',
+      fieldName: 'status',
+      type: 'Select',
+      options: [
+        { label: '启用', value: 'active' },
+        { label: '禁用', value: 'inactive' },
+      ],
+    },
+  ];
+
+  const queryFn = () => {
+    return Promise.resolve({
+      data: advertisersData,
+      total: advertisersData.length,
+    });
+  };
+
   const handleCreate = () => {
     console.log('创建广告主');
   };
@@ -114,43 +115,16 @@ export function AdvertisersPage() {
 
   return (
     <div>
-      <Card>
-        <Form form={searchForm} layout="inline">
-          <Form.Item name="name">
-            <Input placeholder="请输入广告主名称" />
-          </Form.Item>
-          <Form.Item name="status">
-            <Select placeholder="请选择状态">
-              <Select.Option value="active">启用</Select.Option>
-              <Select.Option value="inactive">禁用</Select.Option>
-            </Select>
-          </Form.Item>
-          <Button type="primary" icon={<SearchOutlined />} onClick={handleSearch}>搜索</Button>
-          <Button icon={<ReloadOutlined />} onClick={handleReset}>重置</Button>
-        </Form>
-      </Card>
-    
-      <Card
-        title=" "
-        extra={
+      <ListPage
+        columns={columns}
+        queryFn={queryFn}
+        formOptions={searchFormOptions}
+        operation={
           <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
             新建广告主
           </Button>
         }
-      >
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          rowKey="id"
-          pagination={{
-            total: dataSource.length,
-            pageSize: 10,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total) => `共 ${total} 条记录`,
-          }}
-        />
-      </Card>
+      />
     </div>
   );
 }

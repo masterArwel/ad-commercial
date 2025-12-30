@@ -1,7 +1,8 @@
-import { Cascader, DatePicker, Form, Input, Select } from 'antd';
-import type { ColProps } from 'antd';
-import type { FormInstance } from 'antd/es/form';
-import { Row, Col } from 'antd';
+import React from 'react';
+import type { Dayjs } from 'dayjs';
+import { Cascader, DatePicker, Form, Input, Select, Row, Col } from 'antd';
+import type { ColProps, FormInstance } from 'antd';
+
 import type {
   FormOptions,
   CustomFormItemProps,
@@ -11,15 +12,12 @@ import type {
   SearchSelectProps,
   CascaderFormProps,
 } from './interface';
+
 import './index.css';
-import React from 'react';
-import { cn } from '@/utils';
-import type { Dayjs } from 'dayjs';
 
 const DEFAULT_COL_PROPS: ColProps = {
   span: 8,
 };
-
 export interface SearchFormRef {
   formRef: FormInstance;
 }
@@ -33,7 +31,7 @@ const RenderFormItem: React.FC<{
   return (
     <Row
       gutter={24}
-      className={cn('w-full', 'search-form-items')}
+      className="search-form-items"
       align="middle"
     >
       {formOptions.map((item, index) => {
@@ -251,8 +249,6 @@ const RenderFormItem: React.FC<{
 
         /**
          * 自定义formItem
-         * value 的赋值请使用  value.value  组件会自动取 value.value 作为用户 输入/选择 的值
-         * see https://arco.design/react/components/form#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95%E6%8E%A7%E4%BB%B6
          */
         if (type === 'Custom') {
           return (

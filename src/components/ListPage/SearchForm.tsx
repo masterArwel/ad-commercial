@@ -4,23 +4,18 @@ import React, {
   useImperativeHandle,
   forwardRef,
 } from 'react';
-
+import { isArray } from 'lodash';
 import { Button, Form, Space } from 'antd';
-import type { ColProps } from 'antd';
-import type { FormInstance } from 'antd/es/form';
-import type { FormItemProps, FormProps } from 'antd';
+import type { ColProps, FormInstance, FormItemProps, FormProps } from 'antd';
 import { RedoOutlined, SearchOutlined } from '@ant-design/icons';
+import { cn } from '@/utils';
 
+import RenderFormItem from './RenderFormItem';
 import { type FormOptions } from './interface';
 
 import './index.css';
 
-import { isArray } from 'lodash';
-import RenderFormItem from './RenderFormItem';
-import { cn } from '@/utils';
-
 const { useForm } = Form;
-
 export interface SearchFormRef {
   formRef: FormInstance;
 }
@@ -115,7 +110,7 @@ const SearchForm = forwardRef<
           <Form.Item key={idx} hidden name={item as any}></Form.Item>
         ))}
       </Form>
-      <Space direction={'vertical'} className="search-action right-button">
+      <Space orientation='vertical' className="search-action right-button">
         <Button
           loading={props.loading}
           type="primary"
