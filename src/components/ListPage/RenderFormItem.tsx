@@ -11,6 +11,7 @@ import type {
   SearchFormInputTagProps,
   SearchSelectProps,
   CascaderFormProps,
+  RenderFormItemProps,
 } from './interface';
 
 import './index.css';
@@ -18,14 +19,7 @@ import './index.css';
 const DEFAULT_COL_PROPS: ColProps = {
   span: 8,
 };
-export interface SearchFormRef {
-  formRef: FormInstance;
-}
-
-const RenderFormItem: React.FC<{
-  formOptions?: FormOptions[];
-  colProps?: ColProps;
-}> = props => {
+const RenderFormItem: React.FC<RenderFormItemProps> = props => {
   const { formOptions = [] } = props;
 
   return (

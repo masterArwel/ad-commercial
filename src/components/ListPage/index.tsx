@@ -3,7 +3,7 @@ import { useState, useEffect, forwardRef, useCallback, useRef } from 'react';
 import { Card, Empty, Table } from 'antd';
 import type { PaginationProps } from 'antd';
 
-import { type ProTableProps, type PaginatedResponse, type QueryParams } from './interface';
+import { type ProTableProps, type PaginatedResponse, type QueryParams, type PageInfoConfig } from './interface';
 import SearchForm, { type SearchFormRef } from './SearchForm';
 
 const DEFAULT_QUERY_DATA = {
@@ -14,16 +14,7 @@ const DEFAULT_QUERY_DATA = {
 
 export function getPageInfo(
   data: PaginatedResponse<unknown>,
-  pageInfo: {
-    page?: number;
-    pageSize?: number;
-    showTotal?: boolean;
-    totalField?: string;
-    pageField?: string;
-    pageSizeField?: string;
-    sizeCanChange?: boolean;
-    sizeOptions?: number[];
-  } = {}
+  pageInfo: PageInfoConfig = {}
 ): PaginationProps {
   const {
     showTotal,

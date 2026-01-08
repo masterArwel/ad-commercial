@@ -11,36 +11,14 @@ import { RedoOutlined, SearchOutlined } from '@ant-design/icons';
 import { cn } from '@/utils';
 
 import RenderFormItem from './RenderFormItem';
-import { type FormOptions } from './interface';
+import { type FormOptions, type SearchFormRef, type SearchFormProps } from './interface';
 
 import './index.css';
 
 const { useForm } = Form;
-export interface SearchFormRef {
-  formRef: FormInstance;
-}
-
 const SearchForm = forwardRef<
   SearchFormRef,
-  {
-    form?: FormInstance;
-    loading?: boolean;
-    initialValues?: any;
-    formOptions?: FormOptions[];
-    onSearch: (values: Record<string, any>) => void;
-    onReset?: () => void;
-    extraFields?: FormItemProps['name'][];
-    extra?: {
-      action?: React.ReactNode;
-    };
-    formProps?: FormProps;
-    colProps?: ColProps;
-    classNames?: {
-      wrapper?: string;
-      form?: string;
-    };
-    autoSearch?: boolean;
-  }
+  SearchFormProps
 >((props, ref) => {
   const formRef = useRef<any>();
   const [innerForm] = useForm();
