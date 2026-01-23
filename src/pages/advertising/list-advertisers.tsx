@@ -3,7 +3,6 @@ import { PlusOutlined } from '@ant-design/icons';
 
 import { useNavigate } from '@tanstack/react-router';
 import ListPage from '@/components/ListPage';
-import type { ColumnsType } from 'antd/es/table';
 import type { FormOptions } from '@/components/ListPage/interface';
 
 import { advertisersData } from '@/bffData/advertising';
@@ -114,18 +113,16 @@ export function AdvertisersPage() {
   };
 
   return (
-    <div>
-      <ListPage
-        columns={columns}
-        queryFn={queryFn}
-        formOptions={searchFormOptions}
-        operation={
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新建广告主
-          </Button>
-        }
-      />
-    </div>
+    <ListPage
+      columns={columns}
+      queryFn={queryFn}
+      formOptions={searchFormOptions}
+      operation={
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
+          新建广告主
+        </Button>
+      }
+    />
   );
 }
 

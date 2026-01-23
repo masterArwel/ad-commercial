@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { CampaignPage } from '@/pages/advertising/campaign';
+import { CampaignPage } from '@/pages/advertising/list-campaign';
 
 /**
  * 广告活动路由定义

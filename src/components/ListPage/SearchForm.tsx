@@ -78,15 +78,12 @@ const SearchForm = forwardRef<
         initialValues={initialValues}
         className={cn('search-form-items', props?.classNames?.form)}
         labelAlign="right"
-        labelCol={{ span: 8 }}
+        labelCol={{ span: 5 }}
         wrapperCol={{ span: 16 }}
         onValuesChange={handleValuesChange}
         {...props?.formProps}
       >
-        <RenderFormItem colProps={props.colProps} formOptions={formOptions} />
-        {props?.extraFields?.map((item, idx) => (
-          <Form.Item key={idx} hidden name={item as any}></Form.Item>
-        ))}
+        <RenderFormItem colProps={props.colProps} formOptions={formOptions} />        
       </Form>
       <Space orientation='vertical' className="search-action right-button">
         <Button

@@ -1,9 +1,9 @@
 // 广告计划页面组件
-import { Card, Table, Button, Space, Typography, Tag, Progress } from 'antd';
-import { PlusOutlined, EditOutlined, DeleteOutlined, PlayCircleOutlined, PauseCircleOutlined } from '@ant-design/icons';
+import { Button, Space, Tag, Progress } from 'antd';
 import type { ColumnProps } from 'antd/es/table';
-
-const { Title } = Typography;
+import ListPage from '@/components/ListPage';
+import { planListData } from '@/bffData/plan';
+import { FormOptions } from '@/components/ListPage/interface';
 
 interface PlanItem {
   id: string;
@@ -20,39 +20,6 @@ interface PlanItem {
  * 广告计划页面
  */
 export function PlanPage() {
-  // 模拟数据
-  const dataSource: PlanItem[] = [
-    {
-      id: '1',
-      name: '春节推广计划',
-      advertiser: '哈啰出行',
-      status: 'running',
-      budget: 100000,
-      spent: 45600,
-      startDate: '2024-01-15',
-      endDate: '2024-02-15',
-    },
-    {
-      id: '2',
-      name: '品牌曝光计划',
-      advertiser: '美团外卖',
-      status: 'paused',
-      budget: 80000,
-      spent: 32000,
-      startDate: '2024-01-10',
-      endDate: '2024-02-10',
-    },
-    {
-      id: '3',
-      name: '用户拉新计划',
-      advertiser: '滴滴出行',
-      status: 'completed',
-      budget: 50000,
-      spent: 50000,
-      startDate: '2024-01-01',
-      endDate: '2024-01-31',
-    },
-  ];
 
   const columns: ColumnProps<PlanItem>[] = [
     {
@@ -125,38 +92,76 @@ export function PlanPage() {
     },
   ];
 
-  const handleCreate = () => {
-    console.log('创建广告计划');
+  const searchFormOptions: FormOptions[] = [
+    {
+      label: '计划名称',
+      fieldName: 'name',
+      type: 'Input',
+    },
+    {
+      label: '计划ID',
+      fieldName: 'campaignId',
+      type: 'Input',
+    },
+    {
+      label: '活动名称',
+      fieldName: 'campaignType',
+      type: 'Input',
+    },
+    {
+      label: '推广类型',
+      fieldName: 'promotionType',
+      type: 'Select',
+      options: [
+        { label: '全部', value: 'all' },
+        { label: '效果广告', value: 'effect' },
+        { label: '品牌广告', value: 'brand' },
+        { label: '程序化购买', value: 'programmatic' },
+      ],
+    },
+    {
+      label: '计划状态',
+      fieldName: 'planStatus',
+      type: 'Select',
+      options: [
+        { label: '全部', value: 'all' },
+        { label: '投放中', value: 'running' },
+        { label: '已暂停', value: 'paused' },
+        { label: '已完成', value: 'completed' },
+      ],
+    },
+    {
+      label: '投放时间',
+      fieldName: 'dateRange',
+      type: 'DatePicker',
+    },
+
+    {
+      label: '广告主',
+      fieldName: 'advertiser',
+      type: 'Input',
+    },
+    {
+      label: '创建人',
+      fieldName: 'creator',
+      type: 'Input',
+    },
+  ];
+
+  const queryFn = () => {
+    return Promise.resolve({
+      data: planListData,
+      total: planListData.length,
+    });
   };
 
-  return (
-    <div>
-      <div style={{ marginBottom: 24 }}>
-        <Title level={2}>广告计划</Title>
-      </div>
 
-      <Card
-        title="计划列表"
-        extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新建计划
-          </Button>
-        }
-      >
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          rowKey="id"
-          pagination={{
-            total: dataSource.length,
-            pageSize: 10,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total) => `共 ${total} 条记录`,
-          }}
-        />
-      </Card>
-    </div>
+  return (
+    <ListPage
+      columns={columns}
+      queryFn={queryFn}
+      formOptions={searchFormOptions}
+    />
   );
 }
 

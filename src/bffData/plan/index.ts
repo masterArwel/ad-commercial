@@ -1,0 +1,32 @@
+export const planListData = [
+  {
+    id: '1',
+    name: '春节推广计划',
+    advertiser: '哈啰出行',
+    status: 'running',
+    budget: 100000,
+    spent: 45600,
+    startDate: '2024-01-15',
+    endDate: '2024-02-15',
+  },
+  {
+    id: '2',
+    name: '品牌曝光计划',
+    advertiser: '美团外卖',
+    status: 'paused',
+    budget: 80000,
+    spent: 32000,
+    startDate: '2024-01-10',
+    endDate: '2024-02-10',
+  },
+  {
+    id: '3',
+    name: '用户拉新计划',
+    advertiser: '滴滴出行',
+    status: 'completed',
+    budget: 50000,
+    spent: 50000,
+    startDate: '2024-01-01',
+    endDate: '2024-01-31',
+  },
+]

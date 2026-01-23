@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
-import { PlanPage } from '@/pages/advertising/plan';
+import { PlanPage } from '@/pages/advertising/list-plan';
 
 /**
  * 广告计划路由定义

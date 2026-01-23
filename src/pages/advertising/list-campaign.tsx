@@ -1,9 +1,11 @@
 // 广告活动页面组件
-import { Card, Table, Button, Space, Tag } from 'antd';
+import { Button, Space, Tag } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import type { ColumnProps } from 'antd/es/table';
-import PageTemplate from '@/components/PageTemplate';
 import { useNavigate } from '@tanstack/react-router';
+import ListPage from '@/components/ListPage';
+import { FormOptions } from '@/components/ListPage/interface';
+
+import { campaignData } from '@/bffData/campaign';
 
 interface CampaignItem {
   id: string;
@@ -23,47 +25,8 @@ interface CampaignItem {
  */
 export function CampaignPage() {
   const navigate = useNavigate();
-  // 模拟数据
-  const dataSource: CampaignItem[] = [
-    {
-      id: '1',
-      name: '春节首页banner',
-      plan: '春节推广计划',
-      status: 'running',
-      impressions: 125600,
-      clicks: 3200,
-      ctr: 2.55,
-      cost: 15600,
-      startDate: '2024-01-15',
-      endDate: '2024-02-15',
-    },
-    {
-      id: '2',
-      name: '品牌视频广告',
-      plan: '品牌曝光计划',
-      status: 'paused',
-      impressions: 89300,
-      clicks: 1800,
-      ctr: 2.01,
-      cost: 12000,
-      startDate: '2024-01-10',
-      endDate: '2024-02-10',
-    },
-    {
-      id: '3',
-      name: '新用户注册引导',
-      plan: '用户拉新计划',
-      status: 'completed',
-      impressions: 200000,
-      clicks: 8500,
-      ctr: 4.25,
-      cost: 25000,
-      startDate: '2024-01-01',
-      endDate: '2024-01-31',
-    },
-  ];
 
-  const columns: ColumnProps<CampaignItem>[] = [
+  const columns = [
     {
       title: '活动名称',
       dataIndex: 'name',
@@ -141,6 +104,46 @@ export function CampaignPage() {
     },
   ];
 
+  const searchFormOptions: FormOptions[] = [
+    {
+      label: '活动名称',
+      fieldName: 'name',
+      type: 'Input',
+    },
+    {
+      label: '活动ID',
+      fieldName: 'campaignId',
+      type: 'Input',
+    },
+    {
+      label: '活动类型',
+      fieldName: 'campaignType',
+      type: 'Select',
+      options: [
+        { label: '品牌推广', value: 'brand' },
+        { label: '效果推广', value: 'effect' },
+        { label: '程序化购买', value: 'programmatic' },
+      ],
+    },
+    {
+      label: '活动状态',
+      fieldName: 'campaignStatus',
+      type: 'Select',
+      options: [
+        { label: '投放中', value: 'running' },
+        { label: '已暂停', value: 'paused' },
+        { label: '已完成', value: 'completed' },
+      ],
+    },
+  ];
+
+  const queryFn = () => {
+    return Promise.resolve({
+      data: campaignData,
+      total: campaignData.length,
+    });
+  };
+
   const handleCreate = () => {
     console.log('创建广告活动');
   };
@@ -151,32 +154,16 @@ export function CampaignPage() {
   };
 
   return (
-    <PageTemplate 
-      title="广告活动" 
-      description="管理和监控广告活动的投放效果"
-    >
-      <Card
-        title="活动列表"
-        extra={
-          <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
-            新建活动
-          </Button>
-        }
-      >
-        <Table
-          columns={columns}
-          dataSource={dataSource}
-          rowKey="id"
-          pagination={{
-            total: dataSource.length,
-            pageSize: 10,
-            showSizeChanger: true,
-            showQuickJumper: true,
-            showTotal: (total) => `共 ${total} 条记录`,
-          }}
-        />
-      </Card>
-    </PageTemplate>
+    <ListPage
+      columns={columns}
+      queryFn={queryFn}
+      formOptions={searchFormOptions}
+      operation={
+        <Button type="primary" icon={<PlusOutlined />} onClick={handleCreate}>
+          新建广告活动
+        </Button>
+      }
+    />
   );
 }
 

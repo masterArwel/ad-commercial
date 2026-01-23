@@ -42,6 +42,12 @@ import type { CascaderProps } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import type { PaginationProps } from 'antd';
 
+export type ListPageProps = ProTableProps & {
+  form?: FormInstance;
+  searchFormRef?: React.RefObject<SearchFormRef>;
+};
+
+
 // ==================== 搜索表单相关类型 ====================
 
 /**
